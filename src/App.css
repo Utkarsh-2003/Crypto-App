@@ -1,0 +1,41 @@
+.header{
+  text-align: center;
+}
+
+.button{
+  background-color: black;
+  color: white;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: none;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.button-time:hover{
+  background-color: white;
+  color: black;
+  border: 2px solid black;
+}
+
+.button-time{
+  background-color: blue;
+  color: white;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: none;
+  border-radius: 10px;
+  padding: 5px;
+  margin: 2px;
+}
+
+.button:hover
+{
+  background-color: white;
+  color: black;
+  border: 2px solid black;
+}
+
+.button-main{ 
+  text-align: center;
+}
