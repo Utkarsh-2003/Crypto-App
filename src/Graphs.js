@@ -21,52 +21,52 @@ const Chart = () => {
   const [loading, setLoading] = useState(true);
   const [info, setInfo] = useState({});
 
-  const fetchData = async () => {
-    try {
-      const response = await axios.get(
-        `https://api.coincap.io/v2/assets/${id}/history?interval=${timeline}`
-      );
-      const data = response.data.data;
-
-      if (data !== undefined && data.length > 0) {
-        setChartdata({
-          labels: data.map((item) => item.date.slice(0, 10)),
-          datasets: [
-            {
-              data: data.map((item) => item.priceUsd),
-              backgroundColor: "skyblue",
-              borderWidth: 3,
-              borderColor: "skyblue",
-            },
-          ],
-        });
-      }
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const fetchInfo = async () => {
-    try {
-      const response = await axios.get(
-        `https://api.coincap.io/v2/assets/${id}`
-      );
-      const data = response.data.data;
-
-      if (data !== undefined) {
-        setInfo(data);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(
+          `https://api.coincap.io/v2/assets/${id}/history?interval=${timeline}`
+        );
+        const data = response.data.data;
+
+        if (data !== undefined && data.length > 0) {
+          setChartdata({
+            labels: data.map((item) => item.date.slice(0, 10)),
+            datasets: [
+              {
+                data: data.map((item) => item.priceUsd),
+                backgroundColor: "skyblue",
+                borderWidth: 3,
+                borderColor: "skyblue",
+              },
+            ],
+          });
+        }
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    const fetchInfo = async () => {
+      try {
+        const response = await axios.get(
+          `https://api.coincap.io/v2/assets/${id}`
+        );
+        const data = response.data.data;
+
+        if (data !== undefined) {
+          setInfo(data);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
     fetchData();
     fetchInfo();
-  }, []); // Added an empty dependency array to ensure useEffect runs only once.
+  }, [id, timeline]); // Include id and timeline in the dependency array
 
   return (
     <div className="container-fluid">
@@ -77,28 +77,17 @@ const Chart = () => {
             <div className="button-main">
               <button
                 className="button-time"
-                onClick={(e) => {
-                  setTimeline("m15");
-                }}
+                onClick={() => setTimeline("m15")}
               >
                 15 Minutes
               </button>
-              <button
-                className="button-time"
-                onClick={(e) => setTimeline("h1")}
-              >
+              <button className="button-time" onClick={() => setTimeline("h1")}>
                 1 Hour
               </button>
-              <button
-                className="button-time"
-                onClick={(e) => setTimeline("h6")}
-              >
+              <button className="button-time" onClick={() => setTimeline("h6")}>
                 6 Hours
               </button>
-              <button
-                className="button-time"
-                onClick={(e) => setTimeline("d1")}
-              >
+              <button className="button-time" onClick={() => setTimeline("d1")}>
                 1 Day
               </button>
             </div>
