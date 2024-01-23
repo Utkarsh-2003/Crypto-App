@@ -9,8 +9,9 @@ import {
   LinearScale,
   PointElement,
 } from "chart.js/auto";
-import "./App.css";
 import { Link } from "react-router-dom";
+import "bootstrap/dist/css/bootstrap.min.css"; // Import Bootstrap styles
+import "./App.css";
 
 Chartjs.register(LineElement, CategoryScale, LinearScale, PointElement);
 
@@ -66,28 +67,25 @@ const Chart = () => {
 
     fetchData();
     fetchInfo();
-  }, [id, timeline]); // Include id and timeline in the dependency array
+  }, [id, timeline]);
 
   return (
     <div className="container-fluid">
       <div className="row">
         <div className="col-md-8 mx-auto">
-          <div className="container w-100 p-4 border rounded">
+          <div className="container p-4 border rounded">
             <h1 className="header">Line Chart of {id}({timeline}).</h1>
             <div className="button-main">
-              <button
-                className="button-time"
-                onClick={() => setTimeline("m15")}
-              >
+              <button className="btn btn-secondary" onClick={() => setTimeline("m15")}>
                 15 Minutes
               </button>
-              <button className="button-time" onClick={() => setTimeline("h1")}>
+              <button className="btn btn-secondary" onClick={() => setTimeline("h1")}>
                 1 Hour
               </button>
-              <button className="button-time" onClick={() => setTimeline("h6")}>
+              <button className="btn btn-secondary" onClick={() => setTimeline("h6")}>
                 6 Hours
               </button>
-              <button className="button-time" onClick={() => setTimeline("d1")}>
+              <button className="btn btn-secondary" onClick={() => setTimeline("d1")}>
                 1 Day
               </button>
             </div>
@@ -107,18 +105,20 @@ const Chart = () => {
                       display: false,
                     },
                   },
+                  maintainAspectRatio: false,
                 }}
+                height={400}
               />
             )}
             <br />
-            <Link to="/" className="button">
+            <Link to="/" className="btn btn-primary">
               Back
             </Link>
           </div>
         </div>
 
         <div className="col-md-4 mt-4">
-          <div className="container w-100 p-4 border rounded">
+          <div className="container p-4 border rounded">
             <h5>
               <b>Name: </b>
               {info.name}
@@ -145,9 +145,7 @@ const Chart = () => {
             </h5>
             <h5>
               <b>More Information: </b>
-              <a
-                href={`https://www.blockchain.com/explorer/assets/${info.symbol}`}
-              >
+              <a href={`https://www.blockchain.com/explorer/assets/${info.symbol}`}>
                 Visit here.
               </a>
             </h5>
