@@ -70,7 +70,7 @@ const Chart = () => {
   }, [id, timeline]);
 
   return (
-    <div className="container-fluid">
+    <div className="container">
       <div className="row">
         <div className="col-md-8 mx-auto">
           <div className="container p-4 border rounded">
@@ -92,23 +92,25 @@ const Chart = () => {
             {loading ? (
               <div>Loading...</div>
             ) : (
-              <Line
-                data={chartdata}
-                options={{
-                  elements: {
-                    point: {
-                      radius: 0,
+              <div className="chart-container">
+                <Line
+                  data={chartdata}
+                  options={{
+                    elements: {
+                      point: {
+                        radius: 0,
+                      },
                     },
-                  },
-                  plugins: {
-                    legend: {
-                      display: false,
+                    plugins: {
+                      legend: {
+                        display: false,
+                      },
                     },
-                  },
-                  maintainAspectRatio: false,
-                }}
-                height={400}
-              />
+                    aspectRatio: 1, // Set aspect ratio to 1:1
+                    maintainAspectRatio: false, // Allow chart to fill container
+                  }}
+                />
+              </div>
             )}
             <br />
             <Link to="/" className="btn btn-primary">
